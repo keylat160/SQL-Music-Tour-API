@@ -5,9 +5,9 @@ const { Band, MeetGreet, SetTime, Event } = db
 const { Op } = require('sequelize')
 
 // FIND ALL BANDS
-bands.get('/', async (req, res) => {
+bands.get('/:name', async (req, res) => {
     try {
-        const foundBands = await Band.findAll({
+        const foundBands = await Band.findOne({
             order: [ [ 'available_start_time', 'ASC' ] ],
             where: {
                 name: { [Op.like]: `%${req.query.name ? req.query.name : ''}%` }
